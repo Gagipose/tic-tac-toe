@@ -1,7 +1,7 @@
 
 // game board 
 const gameBoard = (function () {
-    const board = ["2", "x", "x", "3", "4", "5", "6", "7", "8"]; // <---> change back to empty strings later
+    const board = ["", "", "", "", "", "", "", "", ""]; // <---> change back to empty strings later
 
     const addCross = (index) =>{
         board.splice(index, 1, "X");
@@ -12,10 +12,19 @@ const gameBoard = (function () {
         board.splice(index, 1, "O"); 
         console.log(board);
     }
+
+    //places marker and changes user
+    let currentMarker = "X"
+    const addMarker = (index) => {
+        board.splice(index, 1, currentMarker);
+        currentMarker = currentMarker === "X" ? "O" : "X";
+        console.log("player changed to: " + currentMarker);
+        console.log(board);
+    }
  
     const display = () => console.log(board);
 
-    return {board, display, addCross, addCircle};
+    return {board, display, addCross, addCircle, addMarker};
 }());
 
 
@@ -48,7 +57,6 @@ const winCondition = (function () {
             if (a && a === b && a === c) {
                 console.log("WIN!!")
             }
-            console.log(a, b, c);
         }
 
     }
@@ -73,6 +81,14 @@ const winCondition = (function () {
 // gameBoard.addCross(1);
 // gameBoard.addCross(2);
 // gameBoard.addCircle(3);
+
+gameBoard.display(); // Display the initial empty board
+
+gameBoard.addMarker(0); // Player 1 (X) marks position 0 (top-left)
+gameBoard.addMarker(4); // Player 2 (O) marks position 4 (center)
+gameBoard.addMarker(1); // Player 1 (X) marks position 1 (top-center)
+gameBoard.addMarker(8); // Player 2 (O) marks position 8 (bottom-right)
+gameBoard.addMarker(2); // Player 1 (X) marks position 2 (top-right) - possibly winning move for X
 
 winCondition.checkWin();
 // console.log(gameBoard.board.includes("")); // <---- use this to decide if it has "" or not. 
