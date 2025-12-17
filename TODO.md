@@ -11,7 +11,7 @@
 - [x] Create `gameBoard` module (IIFE) with `board` array
 - [x] Add functions to place `X` and `O` (`addCross`, `addCircle`)
 - [x] Add win patterns and `checkWin` logic
-- [ ] Add tie (draw) detection
+- [x] Add tie (draw) detection --> use .includes() method
 - [ ] Change initial `board` to start as all empty cells
 - [ ] Create `Player` factory (`Player(name, marker)`)
 - [ ] Create `gameController` module to manage turns, moves, win/tie, restart
