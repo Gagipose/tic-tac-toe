@@ -12,9 +12,9 @@
 - [x] Add functions to place `X` and `O` (`addCross`, `addCircle`)
 - [x] Add win patterns and `checkWin` logic
 - [x] Add tie (draw) detection --> use .includes() method
-- [ ] Change initial `board` to start as all empty cells
-- [ ] Create `Player` factory (`Player(name, marker)`)
-- [ ] Create `gameController` module to manage turns, moves, win/tie, restart
+- [x] Change initial `board` to start as all empty cells
+- [ ] ~~Create `Player` factory (`Player(name, marker)`)~~ → Skip: `addMarker` already handles X/O switching
+- [ ] Create `gameController` module (optional but recommended) to manage game state, coordinate board/win checks, handle restart
 - [ ] Test full games via console (no DOM yet)
 
 ### DOM / UI
