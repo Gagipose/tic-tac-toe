@@ -1,7 +1,7 @@
 
 // game board 
 const gameBoard = (function () {
-    const board = ["x", "x", "x", "3", "4", "5", "6", "7", "8"]; // <---> change back to empty strings later
+    const board = ["2", "x", "x", "3", "4", "5", "6", "7", "8"]; // <---> change back to empty strings later
 
     const addCross = (index) =>{
         board.splice(index, 1, "X");
@@ -33,6 +33,11 @@ const winCondition = (function () {
     const checkWin = () => {
         const board = gameBoard.board;
         
+        // Return tie and retun/stop
+        if (!gameBoard.board.includes("")) {
+            return console.log("TIE!");
+        }
+
         for (let i = 0; i < win.length; i++) {
             const pattern = win[i];
             const a = board[pattern[0]];
@@ -43,8 +48,9 @@ const winCondition = (function () {
             if (a && a === b && a === c) {
                 console.log("WIN!!")
             }
-            console.log(a, b, c)
+            console.log(a, b, c);
         }
+
     }
 
     return {checkWin}
@@ -69,3 +75,4 @@ const winCondition = (function () {
 // gameBoard.addCircle(3);
 
 winCondition.checkWin();
+// console.log(gameBoard.board.includes("")); // <---- use this to decide if it has "" or not. 
