@@ -13,12 +13,12 @@
 - [x] Add win patterns and `checkWin` logic
 - [x] Add tie (draw) detection --> use .includes() method
 - [x] Change initial `board` to start as all empty cells
-- [ ] ~~Create `Player` factory (`Player(name, marker)`)~~ → Skip: `addMarker` already handles X/O switching
+- [-] ~~Create `Player` factory (`Player(name, marker)`)~~ → Skip: `addMarker` already handles X/O switching
 - [ ] Create `gameController` module (optional but recommended) to manage game state, coordinate board/win checks, handle restart
-- [ ] Test full games via console (no DOM yet)
+- [x] Test full games via console (no DOM yet)
 
 ### DOM / UI
-- [ ] Build 3×3 grid in HTML for the board
+- [x] Build 3×3 grid in HTML for the board
 - [ ] Create inputs for player names
 - [ ] Add Start / Restart button
 - [ ] Add status / message area (whose turn, win, tie)

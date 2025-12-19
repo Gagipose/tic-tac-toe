@@ -1,5 +1,6 @@
 
-// game board 
+/* ---- GAME BOARD MODULE ---- */
+
 const gameBoard = (function () {
     const board = ["", "", "", "", "", "", "", "", ""]; // <---> change back to empty strings later
 
@@ -28,8 +29,8 @@ const gameBoard = (function () {
 }());
 
 
-// check win & tie conditions
-// "if these index positions are the same = win"
+/* ---- WIN CONDITION MODULE ---- */
+
 const winCondition = (function () {
     const win = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8], // horizontal
@@ -65,15 +66,36 @@ const winCondition = (function () {
 }())
 
 
+/* ---- DOM / DISPLAY CONTROLLER ---- */
+// functions
+const cells = document.querySelectorAll(".cell");
 
-// ---- TODO: ----
-// module: make gameboard
-// module: check win or tie
-// function: create new game with 2 players
+const updateDom = () => {
+    const board = gameBoard.board;
+    for (let x in board) {
+        cells[x].textContent = board[x];
+    }
+};
+
+updateDom();
+
+/* ---- EVENT LISTENERS ---- */
+// event listeners
+cells.forEach((cell, idx) => {
+    cell.addEventListener("click", () => {
+        gameBoard.addMarker(idx);
+        updateDom();
+        winCondition.checkWin();
+    });
+});
 
 
 
-// ---- TESTS ----
+/* ---- INITIALIZATION / GAME START ---- */
+// initialize functions
+
+
+/* ---- TESTS / DEBUGGING ---- */
 
 
 // gameBoard.display();
