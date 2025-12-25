@@ -52,7 +52,7 @@ const winCondition = (function () {
     ]
     // const tie = "all are o or x" <--- fix later
 
-    //check for winning match - returns "X", "O", "tie", or null
+    // Determines if there is a win or tie; returns {winner, pattern} for win, {winner: "tie"} for tie, or null if ongoing
     const checkWin = () => {
         const board = gameBoard.getBoard();
         
@@ -65,13 +65,13 @@ const winCondition = (function () {
 
             // if a = empty string, its falsy
             if (a && a === b && a === c) {
-                return a; // Return "X" or "O" who won
+                return { winner: a, pattern }; // Return winner and winning pattern
             }
         }
 
         // Check for tie (board full but no winner)
         if (!board.includes("")) {
-            return "tie";
+            return { winner: "tie" };
         }
 
         return null; // Game still ongoing
@@ -101,14 +101,27 @@ const updateDom = () => {
 
 // Update status message and game state
 const updateStatus = (result) => {
-    if (result === "X" || result === "O") {
-        statusMessage.textContent = `${result} won!`;
+    // Clear all winning highlights first
+    cells.forEach(cell => cell.classList.remove("winning-cell"));
+    
+    // winner
+    if (result && (result.winner === "X" || result.winner === "O")) {
+        statusMessage.textContent = `${result.winner} won!`;
         gameRoot.classList.add("game-over");
         gameOver = true;
-    } else if (result === "tie") {
+        
+        // Highlight winning cells
+        result.pattern.forEach(index => {
+            cells[index].classList.add("winning-cell");
+        });
+        
+    // tie
+    } else if (result && result.winner === "tie") {
         statusMessage.textContent = "It's a tie!";
         gameRoot.classList.add("game-over");
         gameOver = true;
+    
+    // Reset state - runs when updateStatus(null) is called on reset eventListener
     } else {
         statusMessage.textContent = "";
         gameRoot.classList.remove("game-over");
@@ -129,7 +142,7 @@ cells.forEach((cell, index) => {
         updateDom();
         
         // Check for win/tie
-        const result = winCondition.checkWin(); // responds with: a or b or tie or null
+        const result = winCondition.checkWin(); // returns: {winner: "X"/"O", pattern: [winIndices]} | {winner: "tie"} | null
         if (result) {
             updateStatus(result);
         }

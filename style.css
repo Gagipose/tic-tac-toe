@@ -40,6 +40,11 @@ body {
   color: #10b981;
 }
 
+.winning-cell {
+  background: #10b981 !important;
+  border-color: #10b981 !important;
+}
+
 /* ---- GAME BOARD / COMPONENTS ---- */
 
 #game-root {
