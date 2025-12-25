@@ -2,9 +2,9 @@
 /* ---- GAME BOARD MODULE ---- */
 
 const gameBoard = (function () {
-    const board = ["", "", "", "", "", "", "", "", ""]; // <---> change back to empty strings later
+    let board = ["", "", "", "", "", "", "", "", ""];
 
-    const addCross = (index) =>{
+    const addCross = (index) => {
         board.splice(index, 1, "X");
         console.log(board);
     }
@@ -12,6 +12,10 @@ const gameBoard = (function () {
     const addCircle = (index) => {
         board.splice(index, 1, "O"); 
         console.log(board);
+    }
+
+    const reset = () => {
+        board.fill("");
     }
 
     //places marker and changes user
@@ -23,9 +27,9 @@ const gameBoard = (function () {
         console.log(board);
     }
  
-    const display = () => console.log(board);
+    
 
-    return {board, display, addCross, addCircle, addMarker};
+    return {board, addCross, addCircle, addMarker, reset};
 }());
 
 
@@ -67,9 +71,11 @@ const winCondition = (function () {
 
 
 /* ---- DOM / DISPLAY CONTROLLER ---- */
-// functions
+//query selectors
 const cells = document.querySelectorAll(".cell");
+const resetBtn = document.querySelector(".reset-button");
 
+//shows user the current board
 const updateDom = () => {
     const board = gameBoard.board;
     for (let x in board) {
@@ -77,18 +83,20 @@ const updateDom = () => {
     }
 };
 
-updateDom();
-
 /* ---- EVENT LISTENERS ---- */
 // event listeners
-cells.forEach((cell, idx) => {
+cells.forEach((cell, index) => {
     cell.addEventListener("click", () => {
-        gameBoard.addMarker(idx);
+        gameBoard.addMarker(index);
         updateDom();
         winCondition.checkWin();
     });
 });
 
+resetBtn.addEventListener("click", () => {
+    gameBoard.reset();
+    updateDom();
+});
 
 
 /* ---- INITIALIZATION / GAME START ---- */
@@ -104,13 +112,13 @@ cells.forEach((cell, idx) => {
 // gameBoard.addCross(2);
 // gameBoard.addCircle(3);
 
-gameBoard.display(); // Display the initial empty board
+// gameBoard.display(); // Display the initial empty board
 
-gameBoard.addMarker(0); // Player 1 (X) marks position 0 (top-left)
-gameBoard.addMarker(4); // Player 2 (O) marks position 4 (center)
-gameBoard.addMarker(1); // Player 1 (X) marks position 1 (top-center)
-gameBoard.addMarker(8); // Player 2 (O) marks position 8 (bottom-right)
-gameBoard.addMarker(2); // Player 1 (X) marks position 2 (top-right) - possibly winning move for X
+// gameBoard.addMarker(0); // Player 1 (X) marks position 0 (top-left)
+// gameBoard.addMarker(4); // Player 2 (O) marks position 4 (center)
+// gameBoard.addMarker(1); // Player 1 (X) marks position 1 (top-center)
+// gameBoard.addMarker(8); // Player 2 (O) marks position 8 (bottom-right)
+// gameBoard.addMarker(2); // Player 1 (X) marks position 2 (top-right) - possibly winning move for X
 
-winCondition.checkWin();
+// winCondition.checkWin();
 // console.log(gameBoard.board.includes("")); // <---- use this to decide if it has "" or not. 
