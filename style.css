@@ -32,6 +32,14 @@ body {
   letter-spacing: 0.08em;
 }
 
+.status-message {
+  min-height: 2.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #10b981;
+}
+
 /* ---- GAME BOARD / COMPONENTS ---- */
 
 #game-root {
@@ -43,6 +51,12 @@ body {
   grid-template-rows: repeat(3, 1fr);
   gap: 4px;
   margin: 0 auto;
+  transition: opacity 0.3s;
+}
+
+#game-root.game-over {
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 .cell {
